@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 
+
 using std::vector;
 using std::cout;
 using std::cin;
@@ -71,22 +72,35 @@ public :
 };
 
 
+
+
+
+
 class matrix{
-    vector<vector<float>>mat;
-    int N;
+    float** arr;
+    int M;
 
 public:
 
     matrix(){
         cout << "Type size of the matrix" << std::endl;
-        cin >> N;
+        cin >> M;
         cout << "Type elements of the matrix" << std:: endl;
-        for (int i = 0; i < N; i++){
-            for (int j = 0; j< N; j++){
-                int a;
+
+        arr = (float**)malloc(M * sizeof(float**));
+        for (int i = 0; i < M; ++i) {
+            arr[i] = (float*)malloc(M * sizeof(float*));
+        }
+
+
+        for (int i = 0; i < M; ++i){
+            for (int j = 0; j < M; ++j){
+                float a;
                 cin >> a;
-                mat[i][j] = a;
+                arr[i][j] = a;
+
             }
+
         }
     }
 
@@ -95,15 +109,52 @@ public:
 
 
     void GetMatrix(){
-        for (int i = 0; i < N; i++){
-            for (int j = 0; j<N; i++){
-                cout << mat[i][j] << " ";
+        for (int i = 0; i < M; i++){
+            for (int j = 0; j < M; j++){
+                cout << arr[i][j] << " ";
             }
-        cout << std::endl;
+            cout << std::endl;
         }
-
     }
 
+    bool comp(matrix m1){
+        if (this->M != m1.M){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    void sum(matrix v2)
+    {
+        for (int i = 0; i < v2.M; ++i){
+            for(int j = 0; j < v2.M; ++j) {
+                this->arr[i][j] += v2.arr[i][j];
+            }
+        }
+    }
+
+    void diff(matrix v2){
+        for (int i = 0; i< v2.M; i++){
+            for (int j = 0; j < v2.M; j++){
+                this->arr[i][j] -= v2.arr[i][j];
+            }
+        }
+    }
+
+
+    void multi(matrix v2) {
+        for (int i = 0; i< v2.M;i++){
+            for (int j = 0; j< v2.M; j++){
+                float s = 0;
+                for (int k = 0; k< v2.M; k++){
+                    s += this->arr[i][k]*v2.arr[k][j];
+                }
+                this->arr[i][j] = s;
+            }
+        }
+    }
 };
 
 
@@ -112,38 +163,70 @@ public:
 
 int main() {
 
+    char type;
+    cout << "M or V?" << std::endl;
+    cin >> type;
 
-char sign;
-vec v1;
-cout << "Type sign(+-*)" << std::endl;
-cin >> sign;
-vec v2;
+    if (type == 'V') {
 
-matrix m1;
-m1.GetMatrix();
-
+        char sign;
+        vec v1;
+        cout << "Type sign(+-*)" << std::endl;
+        cin >> sign;
+        vec v2;
 
 
+        if (v1.comp(v2) == true) {
 
-if (v1.comp(v2) == true){
+            if (sign == '+') {
+                v1.sum(v2);
+                v1.GetVector();
+            }
 
-    if (sign == '+'){
-        v1.sum(v2);
-        v1.GetVector();
+            if (sign == '-') {
+                v1.dif(v2);
+                v1.GetVector();
+            }
+
+            if (sign == '*') {
+                v1.scalar(v2);
+            }
+        }
+        else {
+            cout << "Size issue";
+        }
     }
 
-    if (sign == '-'){
-        v1.dif(v2);
-        v1.GetVector();
-    }
+    else{
 
-    if (sign == '*'){
-        v1.scalar(v2);
-    }
-}
+        matrix m1;
+        char sign;
+        cout << "Type sign(+-*)" << std::endl;
+        cin >> sign;
+        matrix m2;
+        if (m1.comp(m2) == true){
 
-else{
-    cout << "Size issue";
-}
+            if (sign == '+') {
+                m1.sum(m2);
+                m1.GetMatrix();
+            }
+
+            if (sign == '-') {
+                m1.diff(m2);
+                m1.GetMatrix();
+            }
+
+            if (sign == '*') {
+                m1.multi(m2);
+                m1.GetMatrix();
+            }
+
+        }
+        else{
+            cout << "Size issue";
+
+        }
+
+    }
 
 }
