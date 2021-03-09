@@ -32,7 +32,7 @@ class arr {
 
 		~arr() {
 			for (int i = 0; i < N; i++) {
-					delete p[i];
+					delete[] p[i];
 			}
 			delete[] p;
 		}
