@@ -142,43 +142,21 @@ public:
 
 
     void GetComp(Q_num num2){
-        if ((this->p > 0) && (num2.p > 0)){
-            this->GetDiff(num2);
-
-            if (this->p > 0){
-                cout << "First > Second";
-            }
-            else if (this->p < 0){
-                cout << "First < Second";
-            }
-            else {
-                cout << "First = Second";
-            }
-        }
-        else if ((this->p > 0) && (num2.p < 0)){
+        this->GetDiff(num2);
+        if (this->p > 0){
             cout << "First > Second";
-
         }
-        else if ((this->p < 0) && (num2.p >0)){
-            cout << "Second > First";
+        else if (this->p < 0){
+            cout << "First < Second";
         }
-        else if ((this->p <= 0) && (num2.p <= 0)){
-            this->GetDiff(num2);
-            if (this->p > 0){
-                cout << "First > Second";
-            }
-            else if (this->p < 0){
-                cout << "First < Second";
-            }
-            else {
-                cout << "First = Second";
-            }
-
+        else {
+            cout << "First = Second";
         }
-
-
-
     }
+
+
+
+
 
 };
 
