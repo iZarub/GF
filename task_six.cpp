@@ -63,6 +63,7 @@ int main() {
     for (int i = 0; i < S; i++){
         int a;
         cin >> a;
+        vec.push_back(a);
     }
 
     show(vec, S);
