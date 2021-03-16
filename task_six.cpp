@@ -34,9 +34,9 @@ void show(int M, int N, int ** arr){
 int main() {
     int M, N;
     cin >> M >> N;
-    int ** arr = (int**)malloc(M * sizeof(int**));
+    int ** arr = new int*[M];
     for (int i = 0; i < M; ++i) {
-        arr[i] = (int*)malloc(M * sizeof(int*));
+        arr[i] = new int[N];
     }
 
     for (int i = 0; i < M; ++i){
