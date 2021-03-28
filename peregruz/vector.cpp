@@ -39,64 +39,66 @@ public:
     }
 
 
-    friend vec operator+(vec v1, vec v2) {
-        vec v3;
-        if (v1.N != v2.N) {
+    vec operator+(vec v1) {
+        vec v2;
+        if (v1.N != N) {
             cout << "Size issue";
             exit;
         }
         else {
             for (int i = 0; i < v1.N; i++) {
-                v3.v.push_back(v1.v[i] + v2.v[i]);
+                v2.v.push_back(v1.v[i] + v[i]);
             }
         }
-        return v3;
-    
-    
+        return v2;
     }
 
-    friend vec operator-(vec v1, vec v2) {
-        vec v3;
-        if (v1.N != v2.N) {
+
+    vec operator-(vec v1) {
+        vec v2;
+        if (v1.N != N) {
             cout << "Size issue";
             exit;
         }
         else {
             for (int i = 0; i < v1.N; i++) {
-                v3.v.push_back(v1.v[i] - v2.v[i]);
+                v2.v.push_back(-v1.v[i] + v[i]);
             }
         }
-        return v3;
+        return v2;
     }
 
-    friend float operator*(vec v1, vec v2) {
-        if (v1.N != v2.N) {
+    float operator*(vec v1) {
+        if (v1.N != N) {
             cout << "Size issue";
             exit;
         }
         float s = 0;
-        for (int i = 0; i < v2.N; ++i) {
-            s += v1.v[i] * v2.v[i];
+        for (int i = 0; i < v1.N; ++i) {
+            s += v1.v[i] * v[i];
 
         }
         return s;
     }
+    
 
 };
 
 
 int main() {
-   
+    vec v3;
     vec v1(1);
     v1.GetVector();
     cout << std::endl;
     vec v2(1);
-    v2.GetVector(); 
+    v2.GetVector();
     cout << std::endl;
-    (v1 + v2).GetVector();
+    v3 = v1 + v2;
+    v3.GetVector();
     cout << std::endl;
-    (v1 - v2).GetVector();
+    v3 = v1 - v2;
+    v3.GetVector();
     cout << std::endl;
-    cout << v1 * v2;
-    
+    cout << (v1 * v2);
+
 }
